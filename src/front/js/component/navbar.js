@@ -1,19 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/component.css";
 
-export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+export const Navbar = ({ isLoggedIn, handleLogout }) => {
+    const handleClick = () => {
+        if (isLoggedIn) {
+            handleLogout();
+        }
+    };
+
+    return (
+        <nav className="navbar d-flex justify-content-end"> 
+            <Link to={isLoggedIn ? "/" : "/login"}>
+                <button className="btn" onClick={handleClick}>
+                    {isLoggedIn ? "Log Out" : "Login"}
+                </button>
+            </Link>
+        </nav>
+    );
+    
 };
